@@ -24,6 +24,21 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faEarthAsia} />,
         title: 'English',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleQuestion} />,
@@ -43,14 +58,27 @@ function Header() {
             setSearchResult([]);
         }, 0);
     });
+// hanle logic
+    const handleMenuChange = (menuItem) => {
+        switch (menuItem.type) {
+            case 'language': {
+                console.log(menuItem);
+                break;
+            }
+
+            default:
+                console.log('default');
+        }
+    };
 
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
+                {/* logo */}
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="Tiktok"></img>
                 </div>
-
+                {/* search */}
                 <Tippy
                     interactive //cho phép nhấn vào các phần tử
                     visible={searchResult.length > 0}
@@ -63,6 +91,7 @@ function Header() {
                                 <AccountItem />
                                 <AccountItem />
                             </PopperWrapper>
+                            
                         </div>
                     )}
                 >
@@ -78,11 +107,12 @@ function Header() {
                         </button>
                     </div>
                 </Tippy>
+                {/* action */}
                 <div className={cx('actions')}>
                     <Button text>Upload</Button>
                     <Button primary>Log in</Button>
 
-                    <Menu items={MENU_ITEMS}>
+                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
