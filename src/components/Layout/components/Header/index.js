@@ -19,6 +19,8 @@ import Menu from '~/components/Popper/Menu';
 import Image from '~/components/Image';
 import { InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons/Icon';
 import Search from '../Search';
+import { Link } from 'react-router-dom';
+import routesConfig from '~/config/routes'
 
 const cx = classNames.bind(styles);
 const MENU_ITEMS = [
@@ -54,7 +56,6 @@ const MENU_ITEMS = [
 function Header() {
     const currentUser = true;
 
-  
     // hanle logic
     const handleMenuChange = (menuItem) => {
         switch (menuItem.type) {
@@ -97,9 +98,9 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 {/* logo */}
-                <div className={cx('logo')}>
-                    <img src={images.logo} alt="Tiktok"></img>
-                </div>
+                <Link to={routesConfig.home} className={cx('logo-link')}>
+                    <img src={images.logo} alt="Tiktok" />
+                </Link>
 
                 {/* search */}
                 <Search />
